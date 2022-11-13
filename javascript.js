@@ -1,50 +1,62 @@
 const sketchbox = document.querySelector('#sketchbox');
 
-const num = 16;
+let num = prompt('Enter a number from 10 to 100', '');
 
 
 function sketch(num){
-    let size = 400/num;
-    let grid = num*num;
-    
+    console.log(num);
+    if (num === null) {
+       return alert('Thanks! Come back again!');
+    } else if (num >= 10 && num <= 100) {
+        let size = 300/num;
+        let grid = num*num;
+        
 
-    for(let i = 0; i < grid; i++) {
-        let div = document.createElement('div');
-        div.style.height = `${size}px`;
-        div.style.width = `${size}px`;
-        div.classList.add('box');
-        sketchbox.appendChild(div);
-
-    };
+        for(let i = 0; i < grid; i++) {
+            let div = document.createElement('div');
+            div.style.height = `${size}px`;
+            div.style.width = `${size}px`;
+            div.classList.add('box');
+            sketchbox.appendChild(div);
+        }
+    } else {
+        num = prompt('Numbers from 10 to 100 only', '');
+        sketch (num);
+    }
 };
+
 sketch(num);
 const boxes = document.querySelectorAll('.box')
 
-//event to start drawing
-sketchbox.addEventListener('mousedown', (e) => {
-    draw(e);
-});
-
-sketchbox.addEventListener('mouseup', (e) => {
-    undraw(e);
-});
-
-
-
 //function to start drawing
+
+sketchbox.addEventListener('mousedown', function (e) {
+    draw(e);
+}, true);
+
+
+//function to add draw
 function draw(e) {
     boxes.forEach((div) => {
-        div.addEventListener('mouseover', test(e));
-    });
+        div.addEventListener('mouseover', function (e) {
+            div.style.background = 'black';
+            console.log(e);
+        }, false);   
+    }) ;
 }
 
-function test(e){
-    console.log(e.target);
-}
+//function to stop drawing
+sketchbox.addEventListener('mousedown', function (e) {
+    undraw(e);
+    console.log('triggered');
+}, true);
 
-
+//function to remove drawing
 function undraw(e) {
     boxes.forEach((div) => {
-        div.removeEventListener('mouseover', test);
-    });
+        div.removeEventListener('mouseover', function (e) {
+            div.style.background = 'black';
+            console.log(e);
+        }, false);   
+    }) ;
 }

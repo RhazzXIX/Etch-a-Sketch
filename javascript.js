@@ -8,7 +8,7 @@ function sketch(num){
     if (num === null) {
        return alert('Thanks! Come back again!');
     } else if (num >= 10 && num <= 100) {
-        let size = 300/num;
+        let size = 500/num;
         let grid = num*num;
         
 

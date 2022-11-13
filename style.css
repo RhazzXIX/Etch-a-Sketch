@@ -1,9 +1,10 @@
 body{
     font-family: 'Times New Roman', sans-serif;
-    height: 99vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #607d8b;
+    min-width: 710px;
 }
 
 #header {
@@ -14,7 +15,7 @@ body{
 #content {
     display: flex;
     max-width: 1200px;
-    padding: 100px;
+    padding: 70px;
     background-color: bisque;
     justify-content: space-between;
     border-radius: 100px;
@@ -64,8 +65,8 @@ body{
 #sketchbox {
     display: flex;
     background-color: white;
-    height: 300px;
-    width: 300px;
+    height: 500px;
+    width: 500px;
     flex-wrap: wrap;
     border: 1px solid black;
 }
@@ -84,6 +85,7 @@ body{
     justify-content: center;
     margin: 20px;
     color: aliceblue;
+    padding: 8px;
 }
 #github {
     width: 14px;

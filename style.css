@@ -1,17 +1,95 @@
 body{
-    height: 100vh;
+    font-family: 'Times New Roman', sans-serif;
+    height: 99vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    background-color: #607d8b;
+}
+
+#header {
+    text-align: center;
+    color: aliceblue;
+}
+
+#content {
+    display: flex;
+    max-width: 1200px;
+    padding: 100px;
+    background-color: bisque;
+    justify-content: space-between;
+    border-radius: 100px;
+    gap: 100px;
+    margin: 0 auto;
+    
+}
+
+#color {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    row-gap: 30px;
+    margin-bottom: 20px;
+}
+
+#color button{
+    width: 100px;
+    border-radius: 18px;
+    padding: 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#black {
+    background-color: black;
+    color: white;
+}
+
+#blue {
+    background-color: #fff27c;
+    color: #09aef9;
+}
+
+#rainbow {
+    background-color: #f44336;
+    color: #ffc107;
+}
+
+#sketchBorder{
+    display: flex;
+    background-color: burlywood;
+    border-radius: 18px;
+    padding: 30px;
+    
 }
 #sketchbox {
     display: flex;
+    background-color: white;
     height: 300px;
     width: 300px;
     flex-wrap: wrap;
     border: 1px solid black;
 }
 
+.box{
+    border: #607d8b;
+}
+
 .box:hover{
-    background-color: aquamarine;
+    background-color:  black;
+}
+
+#footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    color: aliceblue;
+}
+#github {
+    width: 14px;
+    margin: 0 4px;
+}
+
+a{
+    text-decoration: none;
 }

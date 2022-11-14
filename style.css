@@ -9,6 +9,7 @@ body{
     flex-direction: column;
     background-color: #607d8b;
     min-width: 710px;
+    margin: 0;
 }
 
 #header {

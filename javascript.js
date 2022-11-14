@@ -2,6 +2,10 @@ const sketchbox = document.querySelector('#sketchbox');
 const x30 = document.querySelector('#x30');
 const x60 = document.querySelector('#x60');
 const x100 = document.querySelector('#x100');
+const body = document.querySelector('body');
+
+//variable to draw
+let draw = false;
 
 let num = 0;
 
@@ -37,6 +41,7 @@ function sketch(){
     }
 }
 
+
 //function to remove grid;
 function unsketch(){
     const boxes = document.querySelectorAll('.box');
@@ -45,36 +50,26 @@ function unsketch(){
     }
 }
 
-
-//function to start drawing
-
+//function to draw
 sketchbox.addEventListener('mousedown', function (e) {
-    draw(e);
+    draw = true;
+    color();
+    
 }, true);
 
-
-//function to add draw
-function draw(e) {
-    boxes.forEach((div) => {
-        div.addEventListener('mouseover', function (e) {
-            div.style.background = 'black';
-            console.log(e);
-        }, false);   
-    }) ;
-}
-
-//function to stop drawing
-sketchbox.addEventListener('mousedown', function (e) {
-    undraw(e);
-    console.log('triggered');
+body.addEventListener('mouseup', function (e) {
+    draw = false;
+    console.log(draw);
 }, true);
 
-//function to remove drawing
-function undraw(e) {
+//function to change color
+function color() {
+    const boxes = document.querySelectorAll('.box');
     boxes.forEach((div) => {
-        div.removeEventListener('mouseover', function (e) {
-            div.style.background = 'black';
-            console.log(e);
-        }, false);   
-    }) ;
+        div.addEventListener('mouseover', (e) => {
+            if (draw == true) {
+                e.target.style.backgroundColor = 'black' }
+        });
+    });
 }
+

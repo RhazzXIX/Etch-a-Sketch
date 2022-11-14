@@ -1,32 +1,50 @@
 const sketchbox = document.querySelector('#sketchbox');
+const x30 = document.querySelector('#x30');
+const x60 = document.querySelector('#x60');
+const x100 = document.querySelector('#x100');
 
-let num = prompt('Enter a number from 10 to 100', '');
+let num = 0;
 
+x30.addEventListener('click', () => {
+    unsketch();
+    num = 30;
+    sketch();
+});
 
-function sketch(num){
+x60.addEventListener('click', () => {
+    unsketch();
+    num = 60;
+    sketch();
+});
+
+x100.addEventListener('click', () => {
+    unsketch();
+    num = 100;
+    sketch();
+});
+
+//function to create grid;
+function sketch(){
     console.log(num);
-    if (num === null) {
-       return alert('Thanks! Come back again!');
-    } else if (num >= 10 && num <= 100) {
-        let size = 500/num;
-        let grid = num*num;
-        
-
-        for(let i = 0; i < grid; i++) {
-            let div = document.createElement('div');
-            div.style.height = `${size}px`;
-            div.style.width = `${size}px`;
-            div.classList.add('box');
-            sketchbox.appendChild(div);
-        }
-    } else {
-        num = prompt('Numbers from 10 to 100 only', '');
-        sketch (num);
+    let size = 500/num;
+    let grid = num*num;
+    for(let i = 0; i < grid; i++) {
+        const box = document.createElement('div');
+        box.style.height = `${size}px`;
+        box.style.width = `${size}px`;
+        box.classList.add('box');
+        sketchbox.appendChild(box);
     }
-};
+}
 
-sketch(num);
-const boxes = document.querySelectorAll('.box')
+//function to remove grid;
+function unsketch(){
+    const boxes = document.querySelectorAll('.box');
+    for(let i = 0; i < boxes.length; i++){
+    sketchbox.removeChild(boxes[i]);
+    }
+}
+
 
 //function to start drawing
 

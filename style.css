@@ -1,3 +1,7 @@
+@font-face {
+    font-family: pokeFont;
+    src: url(./PokemonGb-RAeo.ttf)
+}
 body{
     font-family: 'Times New Roman', sans-serif;
     height: 100vh;
@@ -27,9 +31,19 @@ body{
 #color {
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    row-gap: 30px;
+    align-items: center;
+    justify-content: space-around;
     margin-bottom: 20px;
+}
+
+#color div {
+    font-size: 18px;
+    text-align: center;
+    border-radius: 18px;
+    background-color: white;
+    width: 200px;
+    font-family: pokeFont, sans-serif;
+    padding: 8px;
 }
 
 #color button{
@@ -40,20 +54,21 @@ body{
     font-weight: 600;
 }
 
-#black {
+#color #black {
     background-color: black;
     color: white;
 }
 
-#blue {
+#color #blue {
     background-color: #fff27c;
     color: #09aef9;
 }
 
-#rainbow {
+#color #rainbow {
     background-color: #f44336;
     color: #ffc107;
 }
+
 
 #sketchBorder{
     display: flex;
@@ -69,6 +84,7 @@ body{
     width: 500px;
     flex-wrap: wrap;
     border: 1px solid black;
+    margin: auto;
 }
 
 .box{
@@ -94,4 +110,5 @@ body{
 
 a{
     text-decoration: none;
+    color: rgb(255, 255, 255)
 }

@@ -5,11 +5,13 @@ const black = document.querySelector('#black');
 const eraser = document.querySelector('#eraser');
 const rgb = document.querySelector('#rgb')
 const clear = document.querySelector('#clear');
+const shade = document.querySelector('#shade');
 
 //variable to draw
 let draw = false;
 let randomColor = false;
 let num = 0;
+let darken = false;
 
 
 size.addEventListener('click', () => {
@@ -64,26 +66,37 @@ body.addEventListener('mouseup', function (e) {
 function drawing() {
     const boxes = document.querySelectorAll('.box');
     boxes.forEach((div) => {
+        let a = 0;
         div.addEventListener('mousedown', (e) => {
             if (draw == true && randomColor == true) {
                 r = createRandomColor();
                 g = createRandomColor();
                 b = createRandomColor();
                 penColor = `rgb(${r}, ${g}, ${b})`;
-            e.target.style.backgroundColor = `${penColor}` 
+                e.target.style.backgroundColor = `${penColor}`;
+            } else if (draw == true && darken == true) {
+                a += 0.1;
+                penColor = `rgba(0,0,0,${a})`;
+                e.target.style.backgroundColor = `${penColor}`;
             } else if (draw == true) {
-                e.target.style.backgroundColor = `${penColor}` }
+                e.target.style.backgroundColor = `${penColor}`; 
+            } 
                 e.stopPropagation();
         });
         div.addEventListener('mouseover', (e) => {
             if (draw == true && randomColor == true) {
-                    r = createRandomColor();
-                    g = createRandomColor();
-                    b = createRandomColor();
-                    penColor = `rgb(${r}, ${g}, ${b})`;
+                r = createRandomColor();
+                g = createRandomColor();
+                b = createRandomColor();
+                penColor = `rgb(${r}, ${g}, ${b})`;
                 e.target.style.backgroundColor = `${penColor}` 
+            }  else if (draw == true && darken == true) {
+                a +=0.1
+                e.target.style.backgroundColor = `rgba(0,0,0,${a})`;
+                console.log(a);
             } else if (draw == true) {
-                e.target.style.backgroundColor = `${penColor}` }
+                e.target.style.backgroundColor = `${penColor}` 
+            }
                 e.stopPropagation();
         }); 
     });
@@ -97,24 +110,37 @@ let penColor = 'black'
 black.addEventListener('click', (e) =>{
     penColor = 'black';
     randomColor = false;
+    darken = false;
     e.stopPropagation();
+    console.log(a);
+    a = 0;
 });
 
 eraser.addEventListener('click', (e) => {
     penColor = 'white';
     randomColor = false;
+    darken = false;
     e.stopPropagation();
+    a = 0;
 });
 
 rgb.addEventListener('click', (e) =>{
     randomColor = true;
+    darken = false;
     e.stopPropagation();
-})
+});
 
 //function for random color
 function createRandomColor () {
    return Math.floor(Math.random()*256);
 }
+
+//function for darken mode
+
+shade.addEventListener('click', (e) =>{
+    randomColor = false;
+    darken = true;
+});
 
 
 //function for Clear
@@ -123,6 +149,7 @@ clear.addEventListener('click', clean);
 
 function clean() {
     const boxes = document.querySelectorAll('.box');
+    a = 0;
     boxes.forEach((div) => {
         div.style.backgroundColor = "white"
     });

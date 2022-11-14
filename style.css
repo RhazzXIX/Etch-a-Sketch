@@ -60,13 +60,33 @@ body{
     color: white;
 }
 
-#color #blue {
-    background-color: #fff27c;
-    color: #09aef9;
+#rgb{
+    display: flex;
+    justify-content: center;
 }
 
-#color #rainbow {
-    background-color: #f44336;
+#rgb #red{
+    color: red;
+    margin: 0;
+}
+
+#rgb #green{
+    color: green;
+    margin: 0;
+}
+
+#rgb #blue{
+    color: blue;
+    margin: 0;
+}
+
+#color #eraser {
+    background-color: white;
+    color: black;
+}
+
+#color #rgb {
+    background-color: white;
     color: #ffc107;
 }
 
@@ -88,14 +108,6 @@ body{
     margin: auto;
 }
 
-.box{
-    border: #607d8b;
-}
-
-.box:hover{
-    background-color:  black;
-}
-
 #footer{
     display: flex;
     align-items: center;
@@ -104,6 +116,7 @@ body{
     color: aliceblue;
     padding: 8px;
 }
+
 #github {
     width: 14px;
     margin: 0 4px;
@@ -111,5 +124,4 @@ body{
 
 a{
     text-decoration: none;
-    color: rgb(255, 255, 255)
 }

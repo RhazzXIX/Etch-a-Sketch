@@ -1,3 +1,4 @@
+//html element selector
 const sketchbox = document.querySelector('#sketchbox');
 const size = document.querySelector('#size');
 const body = document.querySelector('body');
@@ -8,23 +9,26 @@ const clear = document.querySelector('#clear');
 const shade = document.querySelector('#shade');
 
 //variable to draw
-let draw = false;
+let mousedown = false;
 let randomColor = false;
 let num = 0;
 let darken = false;
+let penColor = 'black';
 
 
+//button to create canvas
 size.addEventListener('click', () => {
     removeCanvass();
     num = prompt('Enter a number from 10 to 100', '');
     createCanvass();
+    draw();
 });
 
 
 //function to create grid;
 function createCanvass(){
     if (num === null) {
-        return alert('Thanks! Come back again!');
+        return alert('Thanks! Just click the button if you want to draw.');
      } else if (num >= 10 && num <= 100) {
          let size = 500/num;
          let grid = num*num;
@@ -37,10 +41,9 @@ function createCanvass(){
          }
      } else {
          num = prompt('Numbers from 10 to 100 only', '');
-         createCanvass(num);
+         createCanvass();
      }
- }
-
+}
 
 //function to remove grid;
 function removeCanvass(){
@@ -50,70 +53,63 @@ function removeCanvass(){
     }
 }
 
-//event to draw
-sketchbox.addEventListener('mousedown', function (e) {
-    draw = true;
-    drawing();
-    
-}, true);
+//function to draw
+sketchbox.addEventListener('mousedown', (e) => {
+    mousedown = true;
+}, capture = true);
 
-body.addEventListener('mouseup', function (e) {
-    draw = false;
+body.addEventListener('mouseup', (e) => {
+    mousedown = false;
     e.stopPropagation();
-}, true);
+});
 
-//function for drawing
-function drawing() {
-    const boxes = document.querySelectorAll('.box');
-    boxes.forEach((div) => {
-        let a = 0;
+function draw() {
+    const grid = document.querySelectorAll('.box');
+        grid.forEach((div) => {
+            let shade = 0;
         div.addEventListener('mousedown', (e) => {
-            if (draw == true && randomColor == true) {
+            if (mousedown == true && randomColor == true) {
                 r = createRandomColor();
                 g = createRandomColor();
                 b = createRandomColor();
                 penColor = `rgb(${r}, ${g}, ${b})`;
                 e.target.style.backgroundColor = `${penColor}`;
-            } else if (draw == true && darken == true) {
-                a += 0.1;
-                penColor = `rgba(0,0,0,${a})`;
+            } else if (mousedown == true && darken == true) {
+                if(shade < 1) {shade += 0.1;}
+                penColor = `rgba(0,0,0,${shade})`;
                 e.target.style.backgroundColor = `${penColor}`;
-            } else if (draw == true) {
+            } else if (mousedown == true) {
                 e.target.style.backgroundColor = `${penColor}`; 
             } 
                 e.stopPropagation();
         });
         div.addEventListener('mouseover', (e) => {
-            if (draw == true && randomColor == true) {
+            if (mousedown == true && randomColor == true) {
                 r = createRandomColor();
                 g = createRandomColor();
                 b = createRandomColor();
                 penColor = `rgb(${r}, ${g}, ${b})`;
                 e.target.style.backgroundColor = `${penColor}` 
-            }  else if (draw == true && darken == true) {
-                a +=0.1
-                e.target.style.backgroundColor = `rgba(0,0,0,${a})`;
-                console.log(a);
-            } else if (draw == true) {
+            } else if (mousedown == true && darken == true) {
+                if(shade < 1) {shade += 0.1;}
+                e.target.style.backgroundColor = `rgba(0,0,0,${shade})`;
+            } else if (mousedown == true) {
                 e.target.style.backgroundColor = `${penColor}` 
             }
-                e.stopPropagation();
+            e.stopPropagation();
         }); 
     });
-}
-
+}    
 
 //function to change Color
-
-let penColor = 'black'
+//added the draw function to reset shade
 
 black.addEventListener('click', (e) =>{
     penColor = 'black';
     randomColor = false;
     darken = false;
+    draw();
     e.stopPropagation();
-    console.log(a);
-    a = 0;
 });
 
 eraser.addEventListener('click', (e) => {
@@ -121,13 +117,14 @@ eraser.addEventListener('click', (e) => {
     randomColor = false;
     darken = false;
     e.stopPropagation();
-    a = 0;
+    draw();
 });
 
 rgb.addEventListener('click', (e) =>{
     randomColor = true;
     darken = false;
     e.stopPropagation();
+    draw();
 });
 
 //function for random color
@@ -135,23 +132,19 @@ function createRandomColor () {
    return Math.floor(Math.random()*256);
 }
 
-//function for darken mode
+//function for shading mode
 
 shade.addEventListener('click', (e) =>{
     randomColor = false;
     darken = true;
+    e.stopPropagation();
 });
 
 
 //function for Clear
 
-clear.addEventListener('click', clean);
-
-function clean() {
-    const boxes = document.querySelectorAll('.box');
-    a = 0;
-    boxes.forEach((div) => {
-        div.style.backgroundColor = "white"
-    });
-}
-
+clear.addEventListener('click', (e) => {
+    removeCanvass();
+    createCanvass();
+    draw();
+});
